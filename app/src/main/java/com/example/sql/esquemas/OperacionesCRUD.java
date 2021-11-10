@@ -2,10 +2,14 @@ package com.example.sql.esquemas;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class OperacionesCRUD extends SQLiteOpenHelper {
 
@@ -29,6 +33,7 @@ public class OperacionesCRUD extends SQLiteOpenHelper {
         db.execSQL(UsrAsig.Esquema.BORRAR_TABLA_USUARIO_ASIGNATURA);
         db.execSQL(Calificacion.Esquema.BORRAR_TABLA_CALIFICACION);
 
+        onCreate(db);
     }
 
     public long insertTabla(ContentValues columnas_valores_insertar, String nombre_tabla){
@@ -44,5 +49,33 @@ public class OperacionesCRUD extends SQLiteOpenHelper {
             System.out.println("Error:"+e.getMessage());
         }
         return id_reg_insertado;
+    }
+    public List<ContentValues> obtenerDatos(String columnasObtener[], String consultaFiltro, String valoresFiltro[], String nomTabla){
+        Cursor registrosRet = null;
+        List<ContentValues> listaRegistros = new ArrayList<ContentValues>();
+
+        try{
+            SQLiteDatabase db = this.getWritableDatabase();
+            registrosRet = db.query(nomTabla, columnasObtener, consultaFiltro, valoresFiltro,null,null,null);
+            if(null != registrosRet){
+                registrosRet.moveToFirst();
+
+                while(registrosRet.isAfterLast()==false){
+                    ContentValues auxiliar = new ContentValues();
+
+                    for(int i=0; i < registrosRet.getColumnCount();i++){
+                        auxiliar.put(registrosRet.getColumnName(i), registrosRet.getString(i));
+                    }
+                    listaRegistros.add(auxiliar);
+                    registrosRet.moveToNext();
+                }
+                registrosRet.close();
+            }
+
+        }catch(Exception e){
+            System.out.println("Error metodo obtenerDatos: "+e.getMessage());
+        }
+
+        return listaRegistros;
     }
 }

@@ -24,7 +24,7 @@ public class MainActivity2 extends AppCompatActivity {
         descripcion = findViewById(R.id.descripcion);
     }
     public void insertar(View v){
-        OperacionesCRUD instacia = new OperacionesCRUD(this, "BDTEST", null, 4);
+        OperacionesCRUD instacia = new OperacionesCRUD(this, "BDTEST", null, 5);
 
         ContentValues datosAsignatura = new ContentValues();
         datosAsignatura.put(Asignatura.Esquema.CODIGO, String.valueOf(codigo));

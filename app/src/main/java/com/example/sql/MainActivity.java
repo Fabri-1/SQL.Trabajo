@@ -14,13 +14,13 @@ import com.example.sql.esquemas.User;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText nombre,paterno,materno,direccion,email,edad,genero,telefono;
+    EditText nombre, paterno, materno, direccion, email, edad, genero, telefono;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        nombre = findViewById(R.id.nombre);
+        nombre = findViewById(R.id.nombre2);
         paterno = findViewById(R.id.apePaterno);
         materno = findViewById(R.id.apeMaterno);
         direccion = findViewById(R.id.direccion);
@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
         telefono = findViewById(R.id.telefono);
     }
 
-    public void insertUser(View v){
-        OperacionesCRUD instacia = new OperacionesCRUD(this, "BDTEST", null, 4);
+    public void insertUser(View v) {
+        OperacionesCRUD instacia = new OperacionesCRUD(this, "BDTEST", null, 5);
 
         ContentValues datosUsuario = new ContentValues();
         datosUsuario.put(User.Esquema.NOMBRE, String.valueOf(nombre));
@@ -45,13 +45,21 @@ public class MainActivity extends AppCompatActivity {
 
         long id_insertada = instacia.insertTabla(datosUsuario, User.Esquema.TABLA_NAME);
 
-        Toast.makeText(this,"ID"+id_insertada, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "ID" + id_insertada, Toast.LENGTH_SHORT).show();
 
     }
-    public void next(View v){
-        Intent i=new Intent(this,MainActivity2.class);
+
+    public void next(View v) {
+        Intent i = new Intent(this, MainActivity2.class);
         startActivity(i);
 
     }
+
+    public void next2(View v){
+        Intent i= new Intent (this, ListaUsuarios.class);
+        startActivity(i);
+    }
+
+
 
 }
