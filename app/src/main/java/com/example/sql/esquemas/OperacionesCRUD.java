@@ -50,6 +50,7 @@ public class OperacionesCRUD extends SQLiteOpenHelper {
         }
         return id_reg_insertado;
     }
+
     public List<ContentValues> obtenerDatos(String columnasObtener[], String consultaFiltro, String valoresFiltro[], String nomTabla){
         Cursor registrosRet = null;
         List<ContentValues> listaRegistros = new ArrayList<ContentValues>();
@@ -77,5 +78,30 @@ public class OperacionesCRUD extends SQLiteOpenHelper {
         }
 
         return listaRegistros;
+    }
+
+    public int borrarRegistro(String nombre_tabla, String condicion, String[] val_condicion){
+        int registros_eliminados=0;
+
+        try{
+            SQLiteDatabase db = this.getWritableDatabase();
+            registros_eliminados = db.delete(nombre_tabla,condicion,val_condicion);
+        }catch(Exception e){
+            System.out.println("Error metodo borrar"+e.getMessage());
+        }
+        return registros_eliminados;
+
+    }
+
+    public int actualizarRegistro(ContentValues columna_valores, String condicion, String[] condicion_valores, String nombre_tabla){
+        int cantidad_actualizados=0;
+
+        try{
+            SQLiteDatabase db = this.getWritableDatabase();
+            cantidad_actualizados = db.update(nombre_tabla,columna_valores,condicion,condicion_valores);
+        }catch(Exception e){
+            System.out.println("Error metodo actualizar registros"+e.getMessage());
+        }
+        return cantidad_actualizados;
     }
 }

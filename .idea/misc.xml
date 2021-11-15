@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AppsAndroid/SQL/app/src/main/res/layout/activity_lista_asignaturas.xml" value="0.35260416666666666" />
         <entry key="..\:/AppsAndroid/SQL/app/src/main/res/layout/activity_lista_usuarios.xml" value="0.36666666666666664" />
         <entry key="..\:/AppsAndroid/SQL/app/src/main/res/layout/activity_main.xml" value="0.32971014492753625" />
         <entry key="..\:/AppsAndroid/SQL/app/src/main/res/layout/activity_main2.xml" value="0.36666666666666664" />
-        <entry key="..\:/AppsAndroid/SQL/app/src/main/res/layout/item_usuario.xml" value="0.35260416666666666" />
+        <entry key="..\:/AppsAndroid/SQL/app/src/main/res/layout/activity_main3.xml" value="0.33" />
+        <entry key="..\:/AppsAndroid/SQL/app/src/main/res/layout/item_asignatura.xml" value="0.5" />
+        <entry key="..\:/AppsAndroid/SQL/app/src/main/res/layout/item_usuario.xml" value="0.33" />
       </map>
     </option>
   </component>

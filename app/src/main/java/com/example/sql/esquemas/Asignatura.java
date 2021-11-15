@@ -9,6 +9,8 @@ public class Asignatura {
         public static final String CODIGO = "codigo";
         public static final String DESCRIPCION = "descripcion";
 
+        public static final String[] ALLCOLUMNAS = {ID_ASIGNATURA,CODIGO,DESCRIPCION};
+
         public static final String CREAR_TABLA_ASIGNATURA = "CREATE TABLE " + TABLA_ASIGNATURA + "(" + ID_ASIGNATURA + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 CODIGO + " TEXT," + DESCRIPCION + " TEXT)";
 

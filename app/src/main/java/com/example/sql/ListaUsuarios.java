@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -27,7 +29,7 @@ public class ListaUsuarios extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_usuarios);
 
-        OperacionesCRUD instancia= new OperacionesCRUD(this,"BDTEST",null,5);
+        OperacionesCRUD instancia= new OperacionesCRUD(this,"BDTEST",null,9);
 
         String columnasObtener[] = User.Esquema.ALLCOLUMNAS;
         String condicion = "";
@@ -40,7 +42,6 @@ public class ListaUsuarios extends AppCompatActivity {
         if(null == userObtenidos){
             Toast.makeText(this,"Error al botener usuarios", Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(this,"Error al botener usuarios"+userObtenidos.size(), Toast.LENGTH_LONG).show();
             for(int i=0; i < userObtenidos.size();i++){
                 ContentValues auxiliar = userObtenidos.get(i);
                 userVO usuario= new userVO();
@@ -68,12 +69,12 @@ public class ListaUsuarios extends AppCompatActivity {
                         case User.Esquema.GENERO:
                             usuario.setGenero((auxiliar.get(key).toString()));
                             break;
-                       case User.Esquema.TELEFONO:
-                       usuario.setTelefono(55);
-                        break;
+                        case User.Esquema.TELEFONO:
+                            usuario.setTelefono(Integer.parseInt(auxiliar.get(key).toString()));
+                            break;
                         case User.Esquema.EDAD:
-                           usuario.setEdad(33);
-                           break;
+                            usuario.setEdad(Integer.parseInt(auxiliar.get(key).toString()));
+                            break;
                     }
                 }
                 listaUserObtenidos.add(usuario);
@@ -89,4 +90,15 @@ public class ListaUsuarios extends AppCompatActivity {
         }
 
     }
+
+    public void agregarUsuario(View v){
+        Intent i = new Intent(this,MainActivity.class);
+        startActivity(i);
+    }
+
+    public void asignaturas(View v){
+        Intent i = new Intent(this,ListaAsignaturas.class);
+        startActivity(i);
+    }
+
 }

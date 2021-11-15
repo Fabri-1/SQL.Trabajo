@@ -3,6 +3,7 @@ package com.example.sql;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -14,7 +15,7 @@ import com.example.sql.esquemas.OperacionesCRUD;
 
 public class MainActivity2 extends AppCompatActivity {
 
-    EditText codigo, descripcion;
+    private EditText codigo, descripcion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,13 +25,18 @@ public class MainActivity2 extends AppCompatActivity {
         descripcion = findViewById(R.id.descripcion);
     }
     public void insertar(View v){
-        OperacionesCRUD instacia = new OperacionesCRUD(this, "BDTEST", null, 5);
+        OperacionesCRUD instacia = new OperacionesCRUD(this, "BDTEST", null, 9);
 
         ContentValues datosAsignatura = new ContentValues();
-        datosAsignatura.put(Asignatura.Esquema.CODIGO, String.valueOf(codigo));
-        datosAsignatura.put(Asignatura.Esquema.DESCRIPCION, String.valueOf(descripcion));
+        datosAsignatura.put(Asignatura.Esquema.CODIGO, codigo.getText().toString());
+        datosAsignatura.put(Asignatura.Esquema.DESCRIPCION, descripcion.getText().toString());
 
         long id_asignatura_insertado = instacia.insertTabla(datosAsignatura, Asignatura.Esquema.TABLA_ASIGNATURA);
         Toast.makeText(this, "ID: "+id_asignatura_insertado,Toast.LENGTH_SHORT).show();
+    }
+
+    public void volver(View v){
+        Intent i= new Intent(this,ListaAsignaturas.class);
+        startActivity(i);
     }
 }

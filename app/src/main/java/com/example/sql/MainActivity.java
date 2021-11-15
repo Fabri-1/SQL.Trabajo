@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.sql.esquemas.OperacionesCRUD;
@@ -14,7 +15,8 @@ import com.example.sql.esquemas.User;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText nombre, paterno, materno, direccion, email, edad, genero, telefono;
+    private EditText nombre, paterno, materno, direccion, email, edad, telefono;
+    private RadioButton mas, fem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,22 +28,27 @@ public class MainActivity extends AppCompatActivity {
         direccion = findViewById(R.id.direccion);
         email = findViewById(R.id.email);
         edad = findViewById(R.id.edad);
-        genero = findViewById(R.id.genero);
+        mas = findViewById(R.id.mas);
+        fem = findViewById(R.id.fem);
         telefono = findViewById(R.id.telefono);
     }
 
     public void insertUser(View v) {
-        OperacionesCRUD instacia = new OperacionesCRUD(this, "BDTEST", null, 5);
+        OperacionesCRUD instacia = new OperacionesCRUD(this, "BDTEST", null, 9);
 
         ContentValues datosUsuario = new ContentValues();
-        datosUsuario.put(User.Esquema.NOMBRE, String.valueOf(nombre));
-        datosUsuario.put(User.Esquema.APEPATERNO, String.valueOf(paterno));
-        datosUsuario.put(User.Esquema.APEMATERNO, String.valueOf(materno));
-        datosUsuario.put(User.Esquema.DIRECCION, String.valueOf(direccion));
-        datosUsuario.put(User.Esquema.EMAIL, String.valueOf(email));
-        datosUsuario.put(User.Esquema.EDAD, String.valueOf(edad));
-        datosUsuario.put(User.Esquema.GENERO, String.valueOf(genero));
-        datosUsuario.put(User.Esquema.TELEFONO, String.valueOf(telefono));
+        datosUsuario.put(User.Esquema.NOMBRE, nombre.getText().toString());
+        datosUsuario.put(User.Esquema.APEPATERNO, paterno.getText().toString());
+        datosUsuario.put(User.Esquema.APEMATERNO, materno.getText().toString());
+        datosUsuario.put(User.Esquema.DIRECCION, direccion.getText().toString());
+        datosUsuario.put(User.Esquema.EMAIL, email.getText().toString());
+        datosUsuario.put(User.Esquema.EDAD, Integer.parseInt(edad.getText().toString()));
+        if(fem.isChecked()){
+            datosUsuario.put(User.Esquema.GENERO, fem.getText().toString());
+        }else if(mas.isChecked()) {
+            datosUsuario.put(User.Esquema.GENERO, mas.getText().toString());
+        }
+        datosUsuario.put(User.Esquema.TELEFONO, Integer.parseInt(telefono.getText().toString()));
 
         long id_insertada = instacia.insertTabla(datosUsuario, User.Esquema.TABLA_NAME);
 
