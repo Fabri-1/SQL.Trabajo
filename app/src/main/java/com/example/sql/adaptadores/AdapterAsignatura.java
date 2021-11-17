@@ -58,6 +58,7 @@ public class AdapterAsignatura extends RecyclerView.Adapter<AdapterAsignatura.As
                 if(cant_regs_eliminados>0){
                     Toast.makeText(v.getContext(),"La asignatura a sido eliminada",Toast.LENGTH_SHORT).show();
                     AdapterAsignatura.this.listaAsignatura.remove(holder.getAdapterPosition());
+                    AdapterAsignatura.this.notifyDataSetChanged();
                 }else{
                     Toast.makeText(v.getContext(),"Error al eliminar la asignatura",Toast.LENGTH_SHORT).show();
                 }

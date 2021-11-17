@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SQL">
         <activity
+            android:name=".ListaAsignaturaPorUsuario"
+            android:exported="false" />
+        <activity
             android:name=".ListaAsignaturas"
             android:exported="false" />
         <activity

@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sql.ListaUsuarios;
 import com.example.sql.MainActivity3;
 import com.example.sql.R;
 import com.example.sql.esquemas.OperacionesCRUD;
@@ -85,13 +86,21 @@ public class AdapterUser extends RecyclerView.Adapter<AdapterUser.UsuarioHolder>
                 if(cant_regs_eliminados>0){
                     Toast.makeText(v.getContext(),"El usuario a sido eliminado",Toast.LENGTH_SHORT).show();
                     AdapterUser.this.listaUser.remove(holder.getAdapterPosition());
+                    AdapterUser.this.notifyDataSetChanged();
                 }else{
                     Toast.makeText(v.getContext(),"Error al eliminar el usuario",Toast.LENGTH_SHORT).show();
                 }
             }
         });
         holder.detalle.setId(item.getId_usuario());
-
+        holder.detalle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), ListaUsuarios.class);
+                i.putExtra("id_usuario",item.getId_usuario());
+                v.getContext().startActivity(i);
+            }
+        });
 
     }
 
